@@ -34,7 +34,7 @@ Open **http://localhost:8000** and add your printer.
 - **Print Scheduling** — Drag-and-drop queue, multi-printer assignment by model or location, time-based scheduling, re-print with AMS mapping
 - **Smart Automation** — Smart plug control (Tasmota, Home Assistant, MQTT), auto power-on/off, energy monitoring, maintenance reminders
 - **Proxy Mode** — Print remotely from Bambu Studio/OrcaSlicer without VPN or port forwarding, end-to-end TLS encrypted
-- **Notifications** — WhatsApp, Telegram, Discord, Email, Pushover, ntfy with customizable templates and quiet hours
+- **Notifications** — WhatsApp, Telegram, Discord, Slack compatible (Slack, Mattermost...), Email, Pushover, ntfy with customizable templates and quiet hours
 - **Projects** — Group related prints, track parts and plates, bill of materials, cost tracking, export as ZIP/JSON
 - **File Manager** — Upload and organize sliced files, folder structure, print directly to any printer
 - **Integrations** — Spoolman filament sync, MQTT publishing, Prometheus metrics, Bambu Cloud profiles, REST API, Home Assistant
