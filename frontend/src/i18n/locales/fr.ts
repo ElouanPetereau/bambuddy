@@ -3452,6 +3452,7 @@ export default {
       pushover: 'Push fiable (Pushover)',
       callmebot: 'WhatsApp gratuit via CallMeBot',
       webhook: 'Requête HTTP POST personnalisée',
+      slack_compatible: 'Notifications via webhook compatible Slack',
     },
   },
 

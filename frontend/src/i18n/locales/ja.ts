@@ -3321,6 +3321,7 @@ export default {
       pushover: 'シンプルで信頼性の高いプッシュ通知',
       callmebot: 'CallMeBot経由の無料WhatsApp通知',
       webhook: '任意のURLへのジェネリックHTTP POST',
+      slack_compatible: 'Slack互換Webhookによる通知',
     },
   },
 
