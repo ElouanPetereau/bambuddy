@@ -19,6 +19,7 @@ const PROVIDER_OPTIONS: { value: ProviderType; label: string; description: strin
   { value: 'pushover', label: 'Pushover', description: 'Simple, reliable push notifications' },
   { value: 'callmebot', label: 'CallMeBot/WhatsApp', description: 'Free WhatsApp notifications via CallMeBot' },
   { value: 'webhook', label: 'Webhook', description: 'Generic HTTP POST to any URL' },
+  { value: 'slack_compatible', label: 'Slack compatible (Slack, Mattermost...)', description: 'Notifications via Slack-compatible webhook' },
 ];
 
 export function AddNotificationModal({ provider, onClose }: AddNotificationModalProps) {
@@ -215,6 +216,13 @@ export function AddNotificationModal({ provider, onClose }: AddNotificationModal
           { key: 'auth_header', label: 'Authorization', placeholder: 'Bearer token (optional)', type: 'password', required: false },
           { key: 'field_title', label: 'Title Field Name', placeholder: 'title', type: 'text', required: false, showIf: (cfg: Record<string, string>) => cfg.payload_format !== 'slack' },
           { key: 'field_message', label: 'Message Field Name', placeholder: 'message', type: 'text', required: false, showIf: (cfg: Record<string, string>) => cfg.payload_format !== 'slack' },
+        ];
+      case 'slack_compatible':
+        return [
+          { key: 'webhook_url', label: 'Webhook URL', placeholder: 'https://your-server.com/hooks/xxx', type: 'text', required: true },
+          { key: 'channel', label: 'Channel Override', placeholder: '#printer-alerts (optional)', type: 'text', required: false },
+          { key: 'username', label: 'Bot Username', placeholder: 'Bambuddy (optional)', type: 'text', required: false },
+          { key: 'icon_url', label: 'Bot Icon URL', placeholder: 'https://... (optional)', type: 'text', required: false },
         ];
       default:
         return [];

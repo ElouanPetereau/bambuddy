@@ -141,6 +141,7 @@ Perfect for remote print farms, traveling makers, or accessing your home printer
 
 ### 🔔 Notifications
 - WhatsApp, Telegram, Discord
+- Slack compatible (Slack, Mattermost...)
 - Email, Pushover, ntfy
 - Custom webhooks
 - Quiet hours & daily digest

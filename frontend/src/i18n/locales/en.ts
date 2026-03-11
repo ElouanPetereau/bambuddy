@@ -3489,6 +3489,7 @@ export default {
       pushover: 'Simple, reliable push notifications',
       callmebot: 'Free WhatsApp notifications via CallMeBot',
       webhook: 'Generic HTTP POST to any URL',
+      slack_compatible: 'Notifications via Slack-compatible webhook',
     },
   },
 

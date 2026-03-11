@@ -17,6 +17,7 @@ class ProviderType(StrEnum):
     EMAIL = "email"
     DISCORD = "discord"
     WEBHOOK = "webhook"
+    SLACK_COMPATIBLE = "slack_compatible"
 
 
 class NotificationProviderBase(BaseModel):

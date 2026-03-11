@@ -162,6 +162,8 @@ class NotificationService:
                 return await self._send_discord(config, title, message)
             elif provider_type == "webhook":
                 return await self._send_webhook(config, title, message)
+            elif provider_type == "slack_compatible":
+                return await self._send_slack_compatible(config, title, message)
             else:
                 return False, f"Unknown provider type: {provider_type}"
         except Exception as e:
@@ -456,6 +458,50 @@ class NotificationService:
         except Exception as e:
             return False, f"Webhook error: {str(e)}"
 
+    async def _send_slack_compatible(self, config: dict, title: str, message: str) -> tuple[bool, str]:
+        """Send notification via Slack-compatible incoming webhook.
+
+        Uses the attachments format for rich formatting (color sidebar, title, text, footer).
+        Compatible with Slack, Mattermost, and other Slack-compatible platforms.
+        """
+        webhook_url = config.get("webhook_url", "").strip()
+        if not webhook_url:
+            return False, "Webhook URL is required"
+
+        channel = config.get("channel", "").strip()
+        username = config.get("username", "").strip()
+        icon_url = config.get("icon_url", "").strip()
+
+        payload: dict[str, Any] = {
+            "attachments": [
+                {
+                    "color": "#00AE42",  # Bambu gree
+                    "title": title,
+                    "text": message,
+                    "footer": "Bambuddy",
+                    "ts": int(datetime.now(timezone.utc).timestamp()),
+                }
+            ],
+        }
+
+        if channel:
+            payload["channel"] = channel
+        if username:
+            payload["username"] = username
+        if icon_url:
+            payload["icon_url"] = icon_url
+
+        client = await self._get_client()
+        try:
+            response = await client.post(webhook_url, json=payload)
+
+            if response.status_code in (200, 201, 202, 204):
+                return True, "Message sent successfully"
+            else:
+                return False, f"HTTP {response.status_code}: {response.text[:200]}"
+        except Exception as e:
+            return False, f"Slack-compatible webhook error: {str(e)}"
+
     async def _send_to_provider(
         self,
         provider: NotificationProvider,
@@ -487,6 +533,8 @@ class NotificationService:
                 return await self._send_discord(config, title, message, image_data=image_data)
             elif provider.provider_type == "webhook":
                 return await self._send_webhook(config, title, message)
+            elif provider.provider_type == "slack_compatible":
+                return await self._send_slack_compatible(config, title, message)
             else:
                 return False, f"Unknown provider type: {provider.provider_type}"
         except Exception as e:
